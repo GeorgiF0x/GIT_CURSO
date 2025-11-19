@@ -36,3 +36,6 @@ async function borrarUsuario(id) {
 
   return respuesta.ok;
 }
+
+
+//ESTOS SON TODOS LOS TIPOS DE PETICIONES MÁS COMUNES
