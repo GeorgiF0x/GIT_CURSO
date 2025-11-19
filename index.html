@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peticiones HTTP con Async/Await</title>
+    <style>
+        /* Reseteo básico de estilos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilos del cuerpo principal */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Título principal */
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Contenedor de botones */
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        /* Estilos de los botones */
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Colores específicos para cada tipo de botón */
+        .btn-get {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-get:hover {
+            background-color: #45a049;
+        }
+
+        .btn-post {
+            background-color: #008CBA;
+            color: white;
+        }
+
+        .btn-post:hover {
+            background-color: #007399;
+        }
+
+        .btn-put {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .btn-put:hover {
+            background-color: #e68900;
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #da190b;
+        }
+
+        .btn-clear {
+            background-color: #555;
+            color: white;
+        }
+
+        /* Área de resultados */
+        .results {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            min-height: 200px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        /* Indicador de carga */
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+
+        /* Mensaje de error */
+        .error {
+            background-color: #ffe0e0;
+            color: #d00;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Mensaje de éxito */
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Tarjeta de usuario */
+        .user-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .user-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .user-card p {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        /* Tarjeta de post */
+        .post-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .post-card h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .post-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Información adicional */
+        .info {
+            background-color: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        /* Código en línea */
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ejemplos de Peticiones HTTP con Async/Await</h1>
+
+        <!-- Información sobre la API -->
+        <div class="info">
+            <strong>API utilizada:</strong> <code>https://jsonplaceholder.typicode.com</code>
+            <br>
+            Una API REST pública y gratuita para pruebas y prototipos.
+        </div>
+
+        <!-- Botones para las diferentes operaciones -->
+        <div class="buttons">
+            <button class="btn-get" onclick="getUsers()">GET - Obtener Usuarios</button>
+            <button class="btn-get" onclick="getPost()">GET - Obtener Un Post</button>
+            <button class="btn-post" onclick="createPost()">POST - Crear Post</button>
+            <button class="btn-put" onclick="updatePost()">PUT - Actualizar Post</button>
+            <button class="btn-delete" onclick="deletePost()">DELETE - Eliminar Post</button>
+            <button class="btn-clear" onclick="clearResults()">Limpiar Resultados</button>
+        </div>
+
+        <!-- Área donde se mostrarán los resultados -->
+        <div class="results" id="results">
+            <p style="text-align: center; color: #999;">
+                Los resultados de las peticiones aparecerán aquí
+            </p>
+        </div>
+    </div>
+
+    <!-- Enlace al archivo JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
